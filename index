@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCP 档案入口</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        body {
+            background-color: #000;
+            color: #fff;
+            overflow: hidden;
+        }
+        /* 动画容器 - 居中布局 */
+        .animation-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* 图片通用样式 */
+        .scp-img {
+            position: absolute;
+            opacity: 0;
+            transition: all 0.8s ease;
+        }
+        /* 图一动画：淡入→缩小→左滑 */
+        #img1 {
+            width: 80vw; /* 初始占据大尺寸 */
+            animation: fadeIn 0.8s ease forwards, 
+                       scaleDown 0.8s ease forwards 0.8s,
+                       slideLeft 0.8s ease forwards 1.6s;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes scaleDown {
+            0% { transform: scale(1); }
+            100% { transform: scale(0.5); }
+        }
+        @keyframes slideLeft {
+            0% { transform: scale(0.5) translateX(0); }
+            100% { transform: scale(0.5) translateX(-100vw); }
+        }
+        /* 图二动画：淡入 */
+        #img2 {
+            width: 60vw;
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards 2.4s;
+        }
+        /* 点击进入按钮 */
+        .enter-btn {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards 3.2s;
+            cursor: pointer;
+            background: transparent;
+            border: 1px solid #fff;
+            padding: 10px 20px;
+            color: #fff;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .enter-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+        /* 正式内容区域 */
+        .content {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .content.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- 动画容器 -->
+    <div class="animation-container" id="animationContainer">
+        <!-- 图一：SCP基金会会标 -->
+        <img src="https://via.placeholder.com/400/000000/FFFFFF?Text=SCP会标" alt="SCP基金会会标" class="scp-img" id="img1">
+        <!-- 图二：SCP文字标志 -->
+        <img src="https://via.placeholder.com/300/000000/FFFFFF?Text=SCP" alt="SCP文字标志" class="scp-img" id="img2">
+        <button class="enter-btn" id="enterBtn">点击进入</button>
+    </div>
+
+    <!-- 正式内容 -->
+    <div class="content" id="content">
+        数据已损坏
+    </div>
+
+    <script>
+        // 点击进入事件
+        const enterBtn = document.getElementById('enterBtn');
+        const animationContainer = document.getElementById('animationContainer');
+        const content = document.getElementById('content');
+
+        enterBtn.addEventListener('click', () => {
+            animationContainer.style.display = 'none';
+            content.classList.add('show');
+        });
+    </script>
+</body>
+</html>
